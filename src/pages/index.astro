@@ -2,12 +2,309 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
 ---
-
-<BaseLayout title="La Dibujadora de Luz">
+<BaseLayout title="La Dibujadora de Luz - Portafolio fotográfico">
   <Header />
-  <main class="main">
-    <section class="about">
+  <main>
+    <!-- Sección principal (Hero) -->
+    <section class="hero">
+      <div class="hero-background">
+        <Image 
+          src="/src/images/hero-placeholder.jpg" 
+          alt="Fotografía de Maria Camila Porras"
+          width={1920}
+          height={1080}
+          format="webp"
+          loading="eager"
+          quality={90}
+          class="hero-image"
+        />
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">La Dibujadora de Luz</h1>
+        <p class="hero-subtitle">
+          Capturando y preservando recuerdos a través de historias cotidianas y la luz
+        </p>
+        <a href="/about#contacto" class="hero-button">Contactar</a>
+      </div>
+    </section>
+
+    <!-- Sección 2 - Categorías -->
+    <section class="categories">
+      <h2 class="section-title">Servicios</h2>
+      <div class="categories-grid">
+        <a href="/gallery#fotografia" class="category-card">
+          <div class="category-image-wrapper">
+            <Image 
+              src="/src/images/cat-1.jpg" 
+              alt="Categoría Fotografía"
+              width={600}
+              height={600}
+              format="webp"
+              loading="lazy"
+              quality={85}
+              class="category-image"
+            />
+          </div>
+          <span class="category-name">Fotografía</span>
+        </a>
+        <a href="/gallery#videografia" class="category-card">
+          <div class="category-image-wrapper">
+            <Image 
+              src="/src/images/cat-2.jpg" 
+              alt="Categoría Videografía"
+              width={600}
+              height={600}
+              format="webp"
+              loading="lazy"
+              quality={85}
+              class="category-image"
+            />
+          </div>
+          <span class="category-name">Videografía</span>
+        </a>
+        <a href="/gallery#ediciones" class="category-card">
+          <div class="category-image-wrapper">
+            <Image 
+              src="/src/images/cat-3.jpg" 
+              alt="Categoría Ediciones"
+              width={600}
+              height={600}
+              format="webp"
+              loading="lazy"
+              quality={85}
+              class="category-image"
+            />
+          </div>
+          <span class="category-name">Ediciones</span>
+        </a>
+        <a href="/gallery#recuerdos" class="category-card">
+          <div class="category-image-wrapper">
+            <Image 
+              src="/src/images/cat-4.jpg" 
+              alt="Categoría Recuerdos"
+              width={600}
+              height={600}
+              format="webp"
+              loading="lazy"
+              quality={85}
+              class="category-image"
+            />
+          </div>
+          <span class="category-name">Recuerdos</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Sección 3 - Precios -->
+    <section class="pricing">
+      <h2 class="section-title">Precios de Sesiones</h2>
+      <div class="pricing-list">
+        <div class="pricing-item">
+          <div class="pricing-image-wrapper">
+            <Image 
+              src="/src/images/price-1.jpg" 
+              alt="Sesión Familiar"
+              width={200}
+              height={200}
+              format="webp"
+              loading="lazy"
+              quality={85}
+              class="pricing-image"
+            />
+          </div>
+          <div class="pricing-info">
+            <h3 class="pricing-name">Sesión Familiar</h3>
+          </div>
+          <div class="pricing-spacer"></div>
+          <div class="pricing-details">
+            <p>1 - 2 horas | $150.000 COP</p>
+          </div>
+        </div>
+        <div class="pricing-item">
+          <div class="pricing-image-wrapper">
+            <Image 
+              src="/src/images/price-2.jpg" 
+              alt="Sesión de Retratos"
+              width={200}
+              height={200}
+              format="webp"
+              loading="lazy"
+              quality={85}
+              class="pricing-image"
+            />
+          </div>
+          <div class="pricing-info">
+            <h3 class="pricing-name">Retratos</h3>
+          </div>
+          <div class="pricing-spacer"></div>
+          <div class="pricing-details">
+            <p>1 hora | $100.000 COP</p>
+          </div>
+        </div>
+        <div class="pricing-item">
+          <div class="pricing-image-wrapper">
+            <Image 
+              src="/src/images/price-3.jpg" 
+              alt="Sesión de Eventos"
+              width={200}
+              height={200}
+              format="webp"
+              loading="lazy"
+              quality={85}
+              class="pricing-image"
+            />
+          </div>
+          <div class="pricing-info">
+            <h3 class="pricing-name">Eventos</h3>
+          </div>
+          <div class="pricing-spacer"></div>
+          <div class="pricing-details">
+            <p>3 - 4 horas | $250.000 COP</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección 4 - Reseñas -->
+    <section class="reviews">
+      <h2 class="section-title">Lo que dicen mis clientes</h2>
+      <div class="reviews-carousel">
+        <div class="reviews-track">
+          <!-- Grupo 1 -->
+          <div class="review-card">
+            <div class="review-header">
+              <Image 
+                src="/src/images/review-1.jpg" 
+                alt="Cliente 1"
+                width={100}
+                height={100}
+                format="webp"
+                loading="lazy"
+                quality={85}
+                class="review-avatar"
+              />
+              <span class="review-name">Sebastian Florez</span>
+            </div>
+            <p class="review-text">"Increíble experiencia, capturó momentos únicos que atesoraremos para siempre."</p>
+          </div>
+          <div class="review-card">
+            <div class="review-header">
+              <Image 
+                src="/src/images/review-2.jpg" 
+                alt="Cliente 2"
+                width={100}
+                height={100}
+                format="webp"
+                loading="lazy"
+                quality={85}
+                class="review-avatar"
+              />
+              <span class="review-name">Carolina Torres</span>
+            </div>
+            <p class="review-text">"Su talento con la luz es impresionante, los resultados superaron mis expectativas."</p>
+          </div>
+          <div class="review-card">
+            <div class="review-header">
+              <Image 
+                src="/src/images/review-3.jpg" 
+                alt="Cliente 3"
+                width={100}
+                height={100}
+                format="webp"
+                loading="lazy"
+                quality={85}
+                class="review-avatar"
+              />
+              <span class="review-name">Ana López</span>
+            </div>
+            <p class="review-text">"Muy profesional y amable, hizo que nos sintiéramos cómodos durante toda la sesión."</p>
+          </div>
+          <div class="review-card">
+            <div class="review-header">
+              <Image 
+                src="/src/images/review-4.jpg" 
+                alt="Cliente 4"
+                width={100}
+                height={100}
+                format="webp"
+                loading="lazy"
+                quality={85}
+                class="review-avatar"
+              />
+              <span class="review-name">Pedro Gómez</span>
+            </div>
+            <p class="review-text">"Las fotos quedaron hermosas, tiene un ojo único para captar la esencia."</p>
+          </div>
+          <!-- Grupo 2 (duplicado para carrusel infinito) -->
+          <div class="review-card">
+            <div class="review-header">
+              <Image 
+                src="/src/images/review-1.jpg" 
+                alt="Cliente 1"
+                width={100}
+                height={100}
+                format="webp"
+                loading="lazy"
+                quality={85}
+                class="review-avatar"
+              />
+              <span class="review-name">Laura Martínez</span>
+            </div>
+            <p class="review-text">"Increíble experiencia, capturó momentos únicos que atesoraremos para siempre."</p>
+          </div>
+          <div class="review-card">
+            <div class="review-header">
+              <Image 
+                src="/src/images/review-2.jpg" 
+                alt="Cliente 2"
+                width={100}
+                height={100}
+                format="webp"
+                loading="lazy"
+                quality={85}
+                class="review-avatar"
+              />
+              <span class="review-name">Isabel Alende</span>
+            </div>
+            <p class="review-text">"Su talento con la luz es impresionante, los resultados superaron mis expectativas."</p>
+          </div>
+          <div class="review-card">
+            <div class="review-header">
+              <Image 
+                src="/src/images/review-3.jpg" 
+                alt="Cliente 3"
+                width={100}
+                height={100}
+                format="webp"
+                loading="lazy"
+                quality={85}
+                class="review-avatar"
+              />
+              <span class="review-name">Juan Gabriel Aguilera</span>
+            </div>
+            <p class="review-text">"Muy profesional y amable, hizo que nos sintiéramos cómodos durante toda la sesión."</p>
+          </div>
+          <div class="review-card">
+            <div class="review-header">
+              <Image 
+                src="/src/images/review-4.jpg" 
+                alt="Cliente 4"
+                width={100}
+                height={100}
+                format="webp"
+                loading="lazy"
+                quality={85}
+                class="review-avatar"
+              />
+              <span class="review-name">Javier Londoño</span>
+            </div>
+            <p class="review-text">"Las fotos quedaron hermosas, tiene un ojo único para captar la esencia."</p>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
   <Footer />
