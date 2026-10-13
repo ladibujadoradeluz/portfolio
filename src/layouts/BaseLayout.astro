@@ -1,0 +1,27 @@
+---
+import '../assets/scss/main.scss';
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+    title = "Maria Camila Porras", 
+    description = "Portafolio fotográfico de Maria Camila Porras - La Dibujadora de Luz" 
+} = Astro.props;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
