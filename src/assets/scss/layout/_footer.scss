@@ -1,0 +1,56 @@
+@use '../abstracts/variables' as *;
+
+.footer {
+  padding: $spacing-lg $spacing-xl;
+  border-top: 1px solid rgba($color-primary, 0.2);
+  margin-top: $spacing-xl;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+  width: 100%;
+}
+
+.footer-spacer {
+  flex: 1 1 auto;
+}
+
+.footer-text {
+  font-family: $font-body;
+  font-size: 0.9rem;
+  color: $color-primary;
+  flex-shrink: 0;
+}
+
+.footer-social {
+  display: flex;
+  gap: $spacing-md;
+  list-style: none;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.footer-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-primary;
+  transition: color 0.2s ease, transform 0.2s ease;
+  padding: $spacing-xs;
+}
+
+.footer-social-link:hover {
+  color: $color-secondary;
+  transform: translateY(-2px);
+}
+
+.footer-social-icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  display: block;
+}

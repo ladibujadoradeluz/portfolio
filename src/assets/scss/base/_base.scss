@@ -1,0 +1,24 @@
+@use '../abstracts/variables' as *;
+
+body {
+  font-family: $font-body;
+  background-color: $color-status;
+  color: $color-primary;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-title;
+  color: $color-primary;
+  font-weight: normal;
+}
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: $color-secondary;
+}
