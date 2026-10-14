@@ -1,15 +1,18 @@
 @use '../abstracts/variables' as *;
 
-// Sección principal (Hero)
+// === HERO ===
 .hero {
   position: relative;
   min-height: calc(100vh - 160px);
+  padding-top: 160px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   overflow: hidden;
   margin: 0;
   padding: 0;
+  padding-top: 90px;
+  min-height: 100vh;
 }
 
 .hero-background {
@@ -40,6 +43,7 @@
   max-width: 600px;
   padding: $spacing-xl;
   margin-left: $spacing-xl;
+  padding-top: calc($spacing-xl + 80px);
 }
 
 .hero-title {
@@ -79,8 +83,8 @@
   transform: translateY(-2px);
 }
 
-// Sección 2 - Categorías
-.categories {
+// === GALLERY SECTION ===
+.gallery-section {
   padding: $spacing-xl * 2 $spacing-xl;
 }
 
@@ -92,193 +96,62 @@
   color: $color-primary;
 }
 
-.categories-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: $spacing-lg;
-  max-width: 1200px;
+// === ABOUT SECTION ===
+.about-section {
+  padding: $spacing-xl * 2 $spacing-xl;
+  background-color: rgba($color-neutral, 0.2);
+}
+
+.about-content {
+  max-width: 800px;
   margin: 0 auto;
-}
-
-.category-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  transition: transform 0.3s ease;
-}
-
-.category-card:hover {
-  transform: translateY(-5px);
-}
-
-.category-image-wrapper {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  margin-bottom: $spacing-sm;
-  border: 1px solid rgba($color-primary, 0.2);
-}
-
-.category-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.category-card:hover .category-image {
-  transform: scale(1.05);
-}
-
-.category-name {
-  font-family: $font-body;
-  font-size: 1rem;
-  color: $color-primary;
   text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
-// Sección 3 - Precios
-.pricing {
-  padding: $spacing-xl * 2 $spacing-xl;
-  background-color: rgba($color-neutral, 0.3);
+.about-text {
+  font-family: $font-body;
+  font-size: 1.1rem;
+  line-height: 1.9;
+  margin-bottom: $spacing-lg;
+  color: $color-primary;
 }
 
-.pricing-list {
+.contact-info {
   display: flex;
   flex-direction: column;
-  gap: $spacing-lg;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.pricing-item {
-  display: flex;
-  align-items: center;
-  gap: $spacing-md;
-  padding: $spacing-md;
-  background-color: $color-status;
-  border: 1px solid rgba($color-primary, 0.2);
-}
-
-.pricing-image-wrapper {
-  width: 120px;
-  height: 120px;
-  flex-shrink: 0;
-  overflow: hidden;
-}
-
-.pricing-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.pricing-info {
-  flex-shrink: 0;
-  min-width: 200px;
-}
-
-.pricing-name {
-  font-family: $font-title;
-  font-size: 1.5rem;
-  color: $color-primary;
-  margin-bottom: $spacing-xs;
-}
-
-.pricing-spacer {
-  flex: 1 1 auto;
-}
-
-.pricing-details {
-  font-family: $font-body;
-  font-size: 0.95rem;
-  color: $color-primary;
-  text-align: right;
-  flex-shrink: 0;
-}
-
-// Sección 4 - Reseñas (carrusel)
-.reviews {
-  padding: $spacing-xl * 2 $spacing-xl;
-  overflow: hidden;
-}
-
-.reviews-carousel {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-}
-
-.reviews-track {
-  display: flex;
-  gap: $spacing-lg;
-  animation: scroll 30s linear infinite;
-  width: max-content;
-}
-
-.reviews-track:hover {
-  animation-play-state: paused;
-}
-
-.review-card {
-  flex-shrink: 0;
-  width: 320px;
-  padding: $spacing-md;
-  background-color: $color-status;
-  border: 1px solid rgba($color-primary, 0.2);
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-sm;
-}
-
-.review-header {
-  display: flex;
   align-items: center;
   gap: $spacing-sm;
+  margin-top: $spacing-lg;
 }
 
-.review-avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
-.review-name {
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  transition: transform 0.2s ease;
   font-family: $font-body;
-  font-weight: 600;
-  font-size: 0.95rem;
   color: $color-primary;
 }
 
-.review-text {
-  font-family: $font-body;
-  font-size: 0.9rem;
-  line-height: 1.7;
-  color: $color-primary;
-  font-style: italic;
+.contact-link:hover {
+  transform: translateY(-2px);
+  color: $color-secondary;
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+.contact-icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  display: block;
 }
 
-// Responsive
+// === RESPONSIVE ===
 @media (max-width: 968px) {
   .hero-content {
     margin-left: $spacing-md;
     padding: $spacing-lg;
+    padding-top: calc($spacing-lg + 80px);
   }
   
   .hero-title {
@@ -288,31 +161,13 @@
   .hero-subtitle {
     font-size: 1rem;
   }
-  
-  .categories-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: $spacing-md;
-  }
-  
-  .pricing-item {
-    flex-direction: column;
-    text-align: center;
-    gap: $spacing-sm;
-  }
-  
-  .pricing-spacer {
-    display: none;
-  }
-  
-  .pricing-details {
-    text-align: center;
-  }
 }
 
 @media (max-width: 640px) {
   .hero-content {
     margin-left: $spacing-sm;
     padding: $spacing-md;
+    padding-top: calc($spacing-md + 80px);
     max-width: 90%;
   }
   
@@ -329,15 +184,11 @@
     margin-bottom: $spacing-lg;
   }
   
-  .categories {
+  .gallery-section {
     padding: $spacing-xl $spacing-md;
   }
   
-  .pricing {
-    padding: $spacing-xl $spacing-md;
-  }
-  
-  .reviews {
+  .about-section {
     padding: $spacing-xl $spacing-md;
   }
 }

@@ -23,7 +23,7 @@ Consult these guides before working on related tasks:
 
 ## About page
 
-This page is a portfolio for "Maria Camila Porras", also known as "La Dibujadora de Luz". The site uses Astro. But it should also use SASS to organize and centralize the styles.
+This page is a portfolio for "María Camila Porras", also known as "La Dibujadora de Luz". The site uses Astro. But it should also use SASS to organize and centralize the styles.
 
 The color palette is as follows:
 

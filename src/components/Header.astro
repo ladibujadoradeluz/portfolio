@@ -1,8 +1,8 @@
 ---
 const navItems = [
   { href: "/", label: "Inicio" },
-  { href: "/gallery", label: "Galería" },
-  { href: "/about", label: "Sobre mí" },
+  { href: "/#gallery", label: "Galería" },
+  { href: "/#about", label: "Sobre mí" },
 ];
 ---
 <header class="header">
@@ -17,7 +17,7 @@ const navItems = [
         <li class="nav-item">
           <a href={item.href} class="nav-link">{item.label}</a>
         </li>
-      )) }
+      ))}
     </ul>
   </nav>
 </header>
