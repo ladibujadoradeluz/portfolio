@@ -1,0 +1,75 @@
+@use '../abstracts/variables' as *;
+
+.gallery-carousel {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+.gallery-track {
+  display: flex;
+  gap: $spacing-md;
+  animation: scroll-gallery 25s linear infinite;
+  width: max-content;
+}
+
+.gallery-carousel:hover .gallery-track {
+  animation-play-state: paused;
+}
+
+.gallery-item {
+  flex-shrink: 0;
+  width: 320px;
+  break-inside: avoid;
+}
+
+@media (min-width: 640px) {
+  .gallery-item {
+    width: 380px;
+  }
+}
+
+@media (min-width: 968px) {
+  .gallery-item {
+    width: 450px;
+  }
+}
+
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
+  line-height: 0;
+  aspect-ratio: 4 / 5;
+  border: 1px solid rgba($color-primary, 0.2);
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.image-wrapper:hover img {
+  transform: scale(1.03);
+}
+
+.image-caption {
+  font-size: 0.875rem;
+  color: rgba($color-primary, 0.7);
+  margin-top: 0.75rem;
+  text-align: center;
+  font-weight: 300;
+}
+
+@keyframes scroll-gallery {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

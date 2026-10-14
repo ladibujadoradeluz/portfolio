@@ -1,0 +1,50 @@
+---
+import { Image } from 'astro:assets';
+
+export interface Props {
+  images: Array<{
+    src: string;
+    alt: string;
+    title?: string;
+  }>;
+  columns?: number;
+}
+
+const { images } = Astro.props;
+---
+<div class="gallery-carousel gallery-mobile">
+  <div class="gallery-track">
+    {images.map((image, index) => (
+      <figure class="gallery-item">
+        <div class="image-wrapper">
+          <Image 
+            src={image.src} 
+            alt={image.alt || ''} 
+            width={1200} 
+            height={1800}
+            format="webp"
+            loading={index < 6 ? "eager" : "lazy"}
+            quality={85}
+          />
+        </div>
+        {image.title && <figcaption class="image-caption">{image.title}</figcaption>}
+      </figure>
+    ))}
+    {images.map((image, index) => (
+      <figure class="gallery-item" aria-hidden="true">
+        <div class="image-wrapper">
+          <Image 
+            src={image.src} 
+            alt={image.alt || ''} 
+            width={1200} 
+            height={1800}
+            format="webp"
+            loading="lazy"
+            quality={85}
+          />
+        </div>
+        {image.title && <figcaption class="image-caption">{image.title}</figcaption>}
+      </figure>
+    ))}
+  </div>
+</div>

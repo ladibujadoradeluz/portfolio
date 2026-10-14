@@ -3,16 +3,13 @@
 // === HERO ===
 .hero {
   position: relative;
-  min-height: calc(100vh - 160px);
-  padding-top: 160px;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   overflow: hidden;
   margin: 0;
   padding: 0;
-  padding-top: 90px;
-  min-height: 100vh;
 }
 
 .hero-background {
@@ -43,7 +40,7 @@
   max-width: 600px;
   padding: $spacing-xl;
   margin-left: $spacing-xl;
-  padding-top: calc($spacing-xl + 80px);
+  padding-top: 80px;
 }
 
 .hero-title {
@@ -84,8 +81,12 @@
 }
 
 // === GALLERY SECTION ===
+.gallery-mobile {
+  display: none;
+}
+
 .gallery-section {
-  padding: $spacing-xl * 2 $spacing-xl;
+  padding: $spacing-xl * 2 $spacing-xs;
 }
 
 .section-title {
@@ -151,44 +152,72 @@
   .hero-content {
     margin-left: $spacing-md;
     padding: $spacing-lg;
-    padding-top: calc($spacing-lg + 80px);
+    padding-top: 80px;
   }
-  
+
   .hero-title {
     font-size: 2.8rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1rem;
+  }
+
+  .gallery-mobile {
+    display: block;
+  }
+
+  .gallery-desktop {
+    display: none;
   }
 }
 
 @media (max-width: 640px) {
-  .hero-content {
-    margin-left: $spacing-sm;
-    padding: $spacing-md;
-    padding-top: calc($spacing-md + 80px);
-    max-width: 90%;
+  .hero {
+    justify-content: center;
   }
-  
+
+  .hero-content {
+    margin-left: 0;
+    padding: $spacing-md;
+    padding-top: 100px;
+    padding-bottom: $spacing-xl;
+    max-width: 90%;
+    text-align: center;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(to bottom, rgba($color-status, 0.9) 0%, rgba($color-status, 0.7) 50%, rgba($color-status, 0.5) 100%);
+  }
+
   .hero-title {
     font-size: 2.2rem;
+    text-align: center;
   }
-  
+
   .hero-subtitle {
     font-size: 0.95rem;
+    text-align: center;
   }
-  
+
   .section-title {
     font-size: 2rem;
     margin-bottom: $spacing-lg;
   }
-  
+
   .gallery-section {
     padding: $spacing-xl $spacing-md;
   }
-  
+
   .about-section {
     padding: $spacing-xl $spacing-md;
+  }
+
+  .gallery-mobile {
+    display: block;
+  }
+
+  .gallery-desktop {
+    display: none;
   }
 }

@@ -1,23 +1,87 @@
 ---
-const navItems = [
-  { href: "/", label: "Inicio" },
-  { href: "/#gallery", label: "Galería" },
-  { href: "/#about", label: "Sobre mí" },
-];
 ---
 <header class="header">
   <nav class="nav">
     <a href="/" class="brand-link">
       <span class="brand-name">María Camila Porras</span>
-      <span class="brand-subtitle">Fotografía</span>
+      <span class="brand-subtitle">La Dibujadora de Luz</span>
     </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
     <div class="nav-spacer"></div>
-    <ul class="nav-menu">
-      { navItems.map((item) => (
-        <li class="nav-item">
-          <a href={item.href} class="nav-link">{item.label}</a>
-        </li>
-      ))}
+    <ul class="nav-menu" id="navMenu">
+      <li class="nav-item">
+        <a href="/#" class="nav-link">Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a href="/#gallery" class="nav-link">Galería</a>
+      </li>
+      <li class="nav-item">
+        <a href="/#about" class="nav-link">Sobre mí</a>
+      </li>
     </ul>
   </nav>
 </header>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = navMenu.classList.toggle('nav-menu-open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('nav-menu-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  document.querySelectorAll('a[href^="/#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = (this as HTMLAnchorElement).getAttribute('href');
+      if (!href) return;
+      const targetId = href.slice(2);
+      if (!targetId) return;
+      const target = document.getElementById(targetId);
+      if (target) {
+        e.preventDefault();
+        const header = document.querySelector('.header');
+        const headerHeight = header instanceof HTMLElement ? header.offsetHeight : 0;
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+        history.pushState(null, '', href);
+      }
+    });
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = (this as HTMLAnchorElement).getAttribute('href');
+      if (!href || href === '#') return;
+      const target = document.getElementById(href.slice(1));
+      if (target) {
+        e.preventDefault();
+        const header = document.querySelector('.header');
+        const headerHeight = header instanceof HTMLElement ? header.offsetHeight : 0;
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+        history.pushState(null, '', href);
+      }
+    });
+  });
+</script>

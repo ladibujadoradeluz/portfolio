@@ -12,7 +12,7 @@ export interface Props {
 
 const { images, columns = 3 } = Astro.props;
 ---
-<div class="gallery-grid" data-columns={columns}>
+<div class="gallery-grid gallery-desktop" data-columns={columns}>
   {images.map((image, index) => (
     <figure class="gallery-item">
       <div class="image-wrapper">

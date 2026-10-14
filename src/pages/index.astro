@@ -3,18 +3,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import GalleryGrid from '../components/GalleryGrid.astro';
+import GalleryCarrousel from '../components/GalleryCarrousel.astro';
 import { Image } from 'astro:assets';
 
 const galleryImages = [
-  { src: "/src/images/001.jpg", alt: "Fotografía 1" },
-  { src: "/src/images/002.jpg", alt: "Fotografía 2" },
-  { src: "/src/images/003.jpg", alt: "Fotografía 3" },
-  { src: "/src/images/004.jpg", alt: "Fotografía 4" },
-  { src: "/src/images/005.jpg", alt: "Fotografía 5" },
-  { src: "/src/images/006.jpg", alt: "Fotografía 6" },
-  { src: "/src/images/007.jpg", alt: "Fotografía 7" },
-  { src: "/src/images/008.jpg", alt: "Fotografía 8" },
-  { src: "/src/images/009.jpg", alt: "Fotografía 9" },
+  { src: "/src/images/001.webp", alt: "Fotografía 1" },
+  { src: "/src/images/002.webp", alt: "Fotografía 2" },
+  { src: "/src/images/003.webp", alt: "Fotografía 3" },
+  { src: "/src/images/004.webp", alt: "Fotografía 4" },
+  { src: "/src/images/005.webp", alt: "Fotografía 5" },
+  { src: "/src/images/006.webp", alt: "Fotografía 6" },
+  { src: "/src/images/007.webp", alt: "Fotografía 7" },
+  { src: "/src/images/008.webp", alt: "Fotografía 8" },
+  { src: "/src/images/009.webp", alt: "Fotografía 9" },
+  { src: "/src/images/010.webp", alt: "Fotografía 10" },
+  { src: "/src/images/011.webp", alt: "Fotografía 11" },
+  { src: "/src/images/012.webp", alt: "Fotografía 12" },
 ];
 ---
 <BaseLayout title="La Dibujadora de Luz - Portafolio fotográfico">
@@ -24,7 +28,7 @@ const galleryImages = [
     <section class="hero" id="inicio">
       <div class="hero-background">
         <Image 
-          src="/src/images/hero-placeholder.jpg" 
+          src="/src/images/hero-placeholder.webp" 
           alt="Fotografía de María Camila Porras"
           width={1920}
           height={1080}
@@ -38,7 +42,7 @@ const galleryImages = [
       <div class="hero-content">
         <h1 class="hero-title">La Dibujadora de Luz</h1>
         <p class="hero-subtitle">
-          Capturando y preservando recuerdos a través de historias cotidianas y la luz
+          Capturo historias cotidianas y preservo recuerdos a través de la luz.
         </p>
         <a href="/#about" class="hero-button">Contactar</a>
       </div>
@@ -47,7 +51,8 @@ const galleryImages = [
     <!-- Gallery -->
     <section class="gallery-section" id="gallery">
       <h2 class="section-title">Galería</h2>
-      <GalleryGrid images={galleryImages} columns={3} />
+      <GalleryGrid  images={galleryImages} columns={4} />
+      <GalleryCarrousel  images={galleryImages} />
     </section>
 
     <!-- About -->
