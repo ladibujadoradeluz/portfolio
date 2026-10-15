@@ -52,7 +52,7 @@ portfolio-cami/
 │   ├── pages/index.astro      # ÚNICA ruta (/). Compone Header + secciones + Footer
 │   ├── layouts/BaseLayout.astro  # shell HTML + <slot/> + importa main.scss
 │   ├── components/            # Header, Footer, GalleryGrid, GalleryCarrousel (.astro)
-│   ├── images/               # 001–012.webp + hero-placeholder.webp (¡ver §7: sin commitear!)
+│   ├── images/               # 001–012.webp + hero-background.webp (¡ver §7: sin commitear!)
 │   └── assets/
 │       ├── fonts/             # ¡ver §7: a medio completar (falta BetterTogheter)!
 │       └── scss/              # sistema de estilos (único entry: main.scss)
@@ -105,7 +105,7 @@ Qué NO poner dónde: lógica de negocio/servicios en `components/`; componentes
 ### `fonts/` + `images/` (hechos verificados, ver §7)
 
 - Fuentes (verificado el 2026-10-14 con `bun run build`): `_fonts.scss` declara `Better Togheter` y `FF Providence` en `.woff/.woff2` bajo `/src/assets/fonts/`. Existen `FFProvidence.woff/.woff2` (fuente de cuerpo OK); **faltan `BetterTogheter.woff/.woff2`** y el build emite 2 warnings `didn't resolve at build time`. Los títulos caen al fallback `Georgia, serif`.
-- Imágenes: `src/images/001–012.webp` + `hero-placeholder.webp`. Se usan vía `<Image src={string}>` (no vía `import`), por lo que **no reciben optimización/inferencia de Astro**; el build las deja como están. Funciona, pero es un patrón subóptimo documentado, no una convención a imitar ciegamente.
+- Imágenes: `src/images/001–012.webp` + `hero-background.webp`. Se usan vía `<Image src={string}>` (no vía `import`), por lo que **no reciben optimización/inferencia de Astro**; el build las deja como están. Funciona, pero es un patrón subóptimo documentado, no una convención a imitar ciegamente.
 - `public/` vs `src/`: usar `src/images/` + `astro:assets` para fotos de contenido; `public/` solo para lo que debe servirse byte-a-byte en una URL fija (hoy solo `favicon.svg`).
 
 ## 6. Arquitectura y flujo (verificado)
