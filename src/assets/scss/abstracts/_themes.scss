@@ -1,0 +1,27 @@
+@use 'variables' as *;
+
+// Tema claro (default): expone los tokens SASS como custom properties.
+// Tema oscuro: se activa con `data-theme="dark"` en <html>.
+:root {
+  --bg: #{$color-status};
+  --bg-rgb: 255, 252, 247;
+  --text: #{$color-primary};
+  --text-rgb: 117, 99, 61;
+  --brand: #{$color-secondary};
+  --muted-accent: #{$color-accent};
+  --surface: #{$color-neutral};
+  --surface-rgb: 231, 207, 173;
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --bg: #1a1610;
+  --bg-rgb: 26, 22, 16;
+  --text: #e7cfad;
+  --text-rgb: 231, 207, 173;
+  --brand: #dc9334;
+  --muted-accent: #d8b98a;
+  --surface: #2a2218;
+  --surface-rgb: 42, 34, 24;
+  color-scheme: dark;
+}

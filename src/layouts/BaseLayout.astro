@@ -20,6 +20,20 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <script is:inline>
+      try {
+        const stored = localStorage.getItem('theme');
+        const theme =
+          stored === 'dark' || stored === 'light'
+            ? stored
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        // sin almacenamiento: se usa el tema claro por defecto
+      }
+    </script>
   </head>
   <body>
     <slot />

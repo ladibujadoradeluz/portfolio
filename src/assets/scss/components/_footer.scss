@@ -2,7 +2,8 @@
 
 .footer {
   padding: $spacing-lg $spacing-xl;
-  border-top: 1px solid rgba($color-primary, 0.2);
+  border-top: 1px solid rgba(var(--text-rgb), 0.2);
+  transition: border-color $transition-theme-duration $transition-theme-timing;
 }
 
 .footer-content {
@@ -21,8 +22,9 @@
 .footer-text {
   font-family: $font-body;
   font-size: 0.9rem;
-  color: $color-primary;
+  color: var(--text);
   flex-shrink: 0;
+  transition: color $transition-theme-duration $transition-theme-timing;
 }
 
 .footer-social {
@@ -37,13 +39,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: $color-primary;
-  transition: color 0.2s ease, transform 0.2s ease;
+  color: var(--text);
+  transition: color $transition-theme-duration $transition-theme-timing, transform 0.2s ease;
   padding: $spacing-xs;
 }
 
 .footer-social-link:hover {
-  color: $color-secondary;
+  color: var(--brand);
   transform: translateY(-2px);
 }
 

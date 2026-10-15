@@ -2,23 +2,24 @@
 
 body {
   font-family: $font-body;
-  background-color: $color-status;
-  color: $color-primary;
+  background-color: var(--bg);
+  color: var(--text);
   min-height: 100vh;
+  transition: background-color $transition-theme-duration $transition-theme-timing, color $transition-theme-duration $transition-theme-timing;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-title;
-  color: $color-primary;
+  color: var(--text);
   font-weight: normal;
 }
 
 a {
-  color: $color-primary;
+  color: var(--text);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 a:hover {
-  color: $color-secondary;
+  color: var(--brand);
 }

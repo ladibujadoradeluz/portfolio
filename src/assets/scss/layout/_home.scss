@@ -30,7 +30,7 @@
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba($color-status, 0.85) 0%, rgba($color-status, 0.4) 50%, transparent 100%);
+  background: linear-gradient(to right, rgba(var(--bg-rgb), 0.85) 0%, rgba(var(--bg-rgb), 0.4) 50%, transparent 100%);
   z-index: 1;
 }
 
@@ -48,7 +48,8 @@
   font-size: 3.5rem;
   line-height: 1.2;
   margin-bottom: $spacing-sm;
-  color: $color-primary;
+  color: var(--text);
+  transition: color $transition-theme-duration $transition-theme-timing;
 }
 
 .hero-subtitle {
@@ -56,27 +57,28 @@
   font-size: 1.1rem;
   line-height: 1.8;
   margin-bottom: $spacing-lg;
-  color: $color-primary;
+  color: var(--text);
   text-align: left;
+  transition: color $transition-theme-duration $transition-theme-timing;
 }
 
 .hero-button {
   display: inline-block;
   padding: $spacing-sm $spacing-xl;
-  background-color: $color-primary;
-  color: $color-status;
+  background-color: var(--text);
+  color: var(--bg);
   font-family: $font-body;
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  border: 2px solid $color-primary;
+  border: 2px solid var(--text);
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .hero-button:hover {
   background-color: transparent;
-  color: $color-primary;
+  color: var(--text);
   transform: translateY(-2px);
 }
 
@@ -94,13 +96,15 @@
   font-size: 2.5rem;
   text-align: center;
   margin-bottom: $spacing-xl * 2;
-  color: $color-primary;
+  color: var(--text);
+  transition: color $transition-theme-duration $transition-theme-timing;
 }
 
 // === ABOUT SECTION ===
 .about-section {
   padding: $spacing-xl * 2 $spacing-xl;
-  background-color: rgba($color-neutral, 0.2);
+  background-color: rgba(var(--surface-rgb), 0.2);
+  transition: background-color $transition-theme-duration $transition-theme-timing;
 }
 
 .about-content {
@@ -114,7 +118,8 @@
   font-size: 1.1rem;
   line-height: 1.9;
   margin-bottom: $spacing-lg;
-  color: $color-primary;
+  color: var(--text);
+  transition: color $transition-theme-duration $transition-theme-timing;
 }
 
 .contact-info {
@@ -130,14 +135,14 @@
   align-items: center;
   gap: $spacing-xs;
   padding: $spacing-xs $spacing-sm;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, color $transition-theme-duration $transition-theme-timing;
   font-family: $font-body;
-  color: $color-primary;
+  color: var(--text);
 }
 
 .contact-link:hover {
   transform: translateY(-2px);
-  color: $color-secondary;
+  color: var(--brand);
 }
 
 .contact-icon {
@@ -187,7 +192,7 @@
   }
 
   .hero-overlay {
-    background: linear-gradient(to bottom, rgba($color-status, 0.9) 0%, rgba($color-status, 0.7) 50%, rgba($color-status, 0.5) 100%);
+    background: linear-gradient(to bottom, rgba(var(--bg-rgb), 0.9) 0%, rgba(var(--bg-rgb), 0.7) 50%, rgba(var(--bg-rgb), 0.5) 100%);
   }
 
   .hero-title {
