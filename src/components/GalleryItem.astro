@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import type { GalleryImage } from '../data/gallery';
+
+export interface Props {
+  image: GalleryImage;
+  loading?: 'eager' | 'lazy';
+  /** Las copias del loop infinito son decorativas: sin `alt` y ocultas a AT. */
+  decorative?: boolean;
+}
+
+const { image, loading = 'lazy', decorative = false } = Astro.props;
+---
+
+<figure class="gallery-item" aria-hidden={decorative || undefined} data-clone={decorative || undefined}>
+  <div class="image-wrapper">
+    <button
+      type="button"
+      class="gallery-open"
+      data-gallery-open
+      aria-label={`Ver imagen completa: ${image.alt}`}
+    >
+      <Image
+        src={image.src}
+        alt={decorative ? '' : image.alt}
+        width={1200}
+        height={1800}
+        format="webp"
+        loading={loading}
+        decoding="async"
+        quality={85}
+      />
+    </button>
+  </div>
+  {image.title && !decorative && <figcaption class="image-caption">{image.title}</figcaption>}
+</figure>

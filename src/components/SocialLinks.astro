@@ -1,0 +1,44 @@
+---
+import IconInstagram from './icons/IconInstagram.astro';
+import IconMail from './icons/IconMail.astro';
+import { site } from '../data/site';
+
+export interface Props {
+  variant?: 'footer' | 'contact';
+  showLabels?: boolean;
+}
+
+const { variant = 'footer', showLabels = variant === 'contact' } = Astro.props;
+
+const isContact = variant === 'contact';
+const listClass = isContact ? 'contact-info' : 'footer-social';
+const linkClass = isContact ? 'contact-link' : 'footer-social-link';
+const iconClass = isContact ? 'contact-icon' : 'footer-social-icon';
+---
+
+<ul class={listClass}>
+  <li class={isContact ? undefined : 'footer-social-item'}>
+    <a
+      href={site.instagram.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class={linkClass}
+      aria-label={site.instagram.label}
+    >
+      <IconInstagram class={iconClass} />
+      {showLabels && <span>{site.instagram.handle}</span>}
+    </a>
+  </li>
+  <li class={isContact ? undefined : 'footer-social-item'}>
+    <a
+      href={site.email.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class={linkClass}
+      aria-label={site.email.label}
+    >
+      <IconMail class={iconClass} />
+      {showLabels && <span>{site.email.address}</span>}
+    </a>
+  </li>
+</ul>

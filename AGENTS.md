@@ -73,10 +73,10 @@ No hay `src/content/`, `src/utils/`, `src/services/`, `src/hooks/`, `src/styles/
 
 | Directorio | Responsabilidad | Puede depender de | Quién depende de él |
 |---|---|---|---|
-| `src/pages/` | Rutas (file-based routing). Hoy solo `index.astro`: define datos de la galería, secciones hero/gallery/about y contacto. | `layouts/`, `components/`, `astro:assets`, `src/images/` | Nadie (punto final). |
+| `src/pages/` | Rutas (file-based routing). Hoy solo `index.astro`: define datos de la galería, secciones hero/gallery/about y contacto. | `layouts/`, `components/`, `astro:assets`, `public/images/` | Nadie (punto final). |
 | `src/layouts/` | Shell HTML (`<head>`, meta, `lang`, favicon, `<slot/>`). Solo `BaseLayout.astro`; es el **único que importa `main.scss`** (`BaseLayout.astro:2`). Props: `title?`, `description?` con defaults. | `assets/scss/main.scss` | `src/pages/*` |
 | `src/components/` | Componentes `.astro` presentacionales, uno por archivo PascalCase. `Header` (nav fija + `<script>` de menú/scroll), `Footer` (año dinámico + sociales), `GalleryGrid` (desktop), `GalleryCarrousel` (mobile, track duplicado para loop CSS). Props tipadas vía `export interface Props`. | `astro:assets` (solo galerías). Sin imports entre componentes. | `src/pages/*` |
-| `src/images/` | Fotos de contenido optimizables (`.webp`). Se referencian como string `"/src/images/xxx.webp"` en `index.astro:10-22` y se renderizan con `<Image width height format="webp" quality loading>`. | Nada | `src/pages/`, galerías |
+| `public/images/` | Fotos de contenido optimizables (`.webp`). Se referencian como string `"/src/images/xxx.webp"` en `index.astro:10-22` y se renderizan con `<Image width height format="webp" quality loading>`. | Nada | `src/pages/`, galerías |
 | `src/assets/scss/` | Único sistema de estilos. Entry `main.scss` con `@use` explícitos. | `abstracts/_variables.scss` | `BaseLayout.astro` |
 | `src/assets/fonts/` | `@font-face` locales (ver §7). | Nada | `base/_fonts.scss` vía URL |
 | `public/` | Estáticos servidos tal cual (`/favicon.svg`). Solo archivos que NO necesitan procesamiento Vite/Astro. | Nada | `BaseLayout.astro` (`href="/favicon.svg"`) |
@@ -88,7 +88,7 @@ Dónde crear un archivo nuevo:
 - Nuevo layout alternativo → `src/layouts/`.
 - Token (color, spacing, breakpoint, fuente) → `abstracts/_variables.scss`, nunca hardcodeado.
 - Estilo global/base → `base/`; estilo de un componente → `components/_<bloque>.scss`; estilo de sección de página (hero/gallery/about) → `layout/_home.scss` (hoy el único parcial de layout).
-- Foto de contenido → `src/images/` en `.webp`, nombre secuencial o descriptivo en minúsculas + `alt` en español. Favicon/manifest/robots → `public/`.
+- Foto de contenido → `public/images/` en `.webp`, nombre secuencial o descriptivo en minúsculas + `alt` en español. Favicon/manifest/robots → `public/`.
 
 Qué NO poner dónde: lógica de negocio/servicios en `components/`; componentes en `pages/`; parciales SCSS sin `@use` en `main.scss`; imágenes de contenido en `public/`; fuentes en `public/` (van en `src/assets/fonts/` para que Vite las procese).
 
@@ -105,8 +105,8 @@ Qué NO poner dónde: lógica de negocio/servicios en `components/`; componentes
 ### `fonts/` + `images/` (hechos verificados, ver §7)
 
 - Fuentes (verificado el 2026-10-14 con `bun run build`): `_fonts.scss` declara `Better Togheter` y `FF Providence` en `.woff/.woff2` bajo `/src/assets/fonts/`. Existen `FFProvidence.woff/.woff2` (fuente de cuerpo OK); **faltan `BetterTogheter.woff/.woff2`** y el build emite 2 warnings `didn't resolve at build time`. Los títulos caen al fallback `Georgia, serif`.
-- Imágenes: `src/images/001–012.webp` + `hero-background.webp`. Se usan vía `<Image src={string}>` (no vía `import`), por lo que **no reciben optimización/inferencia de Astro**; el build las deja como están. Funciona, pero es un patrón subóptimo documentado, no una convención a imitar ciegamente.
-- `public/` vs `src/`: usar `src/images/` + `astro:assets` para fotos de contenido; `public/` solo para lo que debe servirse byte-a-byte en una URL fija (hoy solo `favicon.svg`).
+- Imágenes: `public/images/001–012.webp` + `hero-background.webp`. Se usan vía `<Image src={string}>` (no vía `import`), por lo que **no reciben optimización/inferencia de Astro**; el build las deja como están. Funciona, pero es un patrón subóptimo documentado, no una convención a imitar ciegamente.
+- `public/` vs `src/`: usar `public/images/` + `astro:assets` para fotos de contenido; `public/` solo para lo que debe servirse byte-a-byte en una URL fija (hoy solo `favicon.svg`).
 
 ## 6. Arquitectura y flujo (verificado)
 
@@ -127,7 +127,7 @@ pages/index.astro  ──imports──▶  layouts/BaseLayout.astro ──@use�
 1. **Reorganización SCSS sin commitear** (`git status`): `_header.scss`/`_footer.scss` se movieron `layout/` → `components/` y `_home.scss` `components/` → `layout/`, con `main.scss` ya actualizado. Es la ubicación correcta; solo falta commit.
 2. **Fuente de títulos ausente**: `_fonts.scss` referencia `BetterTogheter.woff/.woff2`, que no existen (verificado: `ls src/assets/fonts/` solo muestra `FFProvidence.woff/.woff2`; el build emite 2 warnings `didn't resolve at build time`). Los `h1–h6` caen al fallback `Georgia, serif`. Arreglo futuro: añadir los `.woff2` con los nombres esperados.
 3. **`astro check` en rojo**: 2 errores `noImplicitThis` en `Header.astro:50,71` (`function (e)` usa `this`; tipar como `(e: Event)` + `e.currentTarget as HTMLAnchorElement`) y `index` sin usar en `GalleryCarrousel.astro:33`.
-4. **`src/images/` y `src/assets/fonts/` sin commitear** (`??` en git): 13 `.webp` + 2 `.woff` solo existen en local. Sin commit, cualquier clon queda sin fotos y sin fuente de cuerpo.
+4. **`public/images/` y `src/assets/fonts/` sin commitear** (`??` en git): 13 `.webp` + 2 `.woff` solo existen en local. Sin commit, cualquier clon queda sin fotos y sin fuente de cuerpo.
 5. **Deuda menor**: `GalleryCarrousel` ignora prop `columns`; `GalleryGrid` fija `width/height` y `data-columns` pero el CSS solo contempla `2/3/4` (default `3`); hero usa `quality={90}`/galerías `85` sin criterio documentado; favicon genérico de cámara.
 
 ## 8. Flujo de trabajo obligatorio del agente

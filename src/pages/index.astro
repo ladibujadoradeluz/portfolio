@@ -2,82 +2,22 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import GalleryGrid from '../components/GalleryGrid.astro';
-import GalleryCarrousel from '../components/GalleryCarrousel.astro';
-import { Image } from 'astro:assets';
-
-const galleryImages = [
-  { src: "/images/001.webp", alt: "Fotografía 1" },
-  { src: "/images/002.webp", alt: "Fotografía 2" },
-  { src: "/images/003.webp", alt: "Fotografía 3" },
-  { src: "/images/004.webp", alt: "Fotografía 4" },
-  { src: "/images/005.webp", alt: "Fotografía 5" },
-  { src: "/images/006.webp", alt: "Fotografía 6" },
-  { src: "/images/007.webp", alt: "Fotografía 7" },
-  { src: "/images/008.webp", alt: "Fotografía 8" },
-  { src: "/images/009.webp", alt: "Fotografía 9" },
-  { src: "/images/010.webp", alt: "Fotografía 10" },
-  { src: "/images/011.webp", alt: "Fotografía 11" },
-  { src: "/images/012.webp", alt: "Fotografía 12" },
-];
+import Hero from '../components/Hero.astro';
+import Gallery from '../components/Gallery.astro';
+import About from '../components/About.astro';
+import { galleryImages } from '../data/gallery';
+import { site } from '../data/site';
 ---
-<BaseLayout title="La Dibujadora de Luz">
+
+<BaseLayout title={site.title} description={site.description}>
   <Header />
   <main>
-    <!-- Hero -->
-    <section class="hero" id="inicio">
-      <div class="hero-background">
-        <Image 
-          src="/images/hero-background.webp" 
-          alt="Fotografía de María Camila Porras"
-          width={1920}
-          height={1080}
-          format="webp"
-          loading="eager"
-          quality={90}
-          class="hero-image"
-        />
-      </div>
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <h1 class="hero-title">La Dibujadora de Luz</h1>
-        <p class="hero-subtitle">
-          Capturo historias cotidianas y preservo recuerdos a través de la luz.
-        </p>
-        <a href="/#about" class="hero-button">Contactar</a>
-      </div>
-    </section>
-
-    <!-- Gallery -->
+    <Hero />
     <section class="gallery-section" id="gallery">
       <h2 class="section-title">Galería</h2>
-      <GalleryGrid  images={galleryImages} columns={4} />
-      <GalleryCarrousel  images={galleryImages} />
+      <Gallery images={galleryImages} columns={4} />
     </section>
-
-    <!-- About -->
-    <section class="about-section" id="about">
-      <h2 class="section-title">Sobre mí</h2>
-      <div class="about-content">
-        <p class="about-text">
-          Soy fotógrafa de vocación. Mi pasión nace del deseo de capturar los recuerdos y darles materialidad para que se vuelvan eternos. Por eso, disfruto de explorar la espontaneidad y la comodidad de quién se deja fotografiar partiendo desde la creatividad. También, me gusta jugar con la ficción y construir escenas pausadas que sean soñadas. Mi trabajo se halla entre la fotografía de retrato, la fotografía de producto y la fotografía de paisaje.
-        </p>
-        <div class="contact-info">
-          <a href="https://instagram.com/ladibujadoradeluz" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="Instagram">
-            <svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6zm4.75-2.75a1 1 0 110 2 1 1 0 010-2z"/>
-            </svg>
-            @ladibujadoradeluz
-          </a>
-          <a href="mailto:ladibujadoradeluz@gmail.com" class="contact-link" aria-label="Correo electrónico">
-            <svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 6a2 2 0 012-2h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6zm2 0v.01L12 13 20 6.01V6H4zm16 2.236l-7.386 6.154a1 1 0 01-1.228 0L4 8.236V18h16V8.236z"/>
-            </svg>
-            ladibujadoradeluz@gmail.com
-          </a>
-        </div>
-      </div>
-    </section>
+    <About />
   </main>
   <Footer />
 </BaseLayout>

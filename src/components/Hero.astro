@@ -1,0 +1,28 @@
+---
+import { Image } from 'astro:assets';
+import { site } from '../data/site';
+---
+
+<section class="hero" id="inicio">
+  <div class="hero-background">
+    <Image
+      src="/images/hero-background.webp"
+      alt={`Fotografía de ${site.name}`}
+      width={1920}
+      height={1080}
+      format="webp"
+      loading="eager"
+      decoding="async"
+      quality={90}
+      class="hero-image"
+    />
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">{site.tagline}</h1>
+    <p class="hero-subtitle">
+      Capturo historias cotidianas y preservo recuerdos a través de la luz.
+    </p>
+    <a href="#about" class="hero-button">Contactar</a>
+  </div>
+</section>

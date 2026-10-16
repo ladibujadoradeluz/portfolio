@@ -1,0 +1,104 @@
+---
+import GalleryItem from './GalleryItem.astro';
+import type { GalleryImage } from '../data/gallery';
+
+export interface Props {
+  images: GalleryImage[];
+  columns?: 2 | 3 | 4;
+}
+
+const { images, columns = 3 } = Astro.props;
+---
+
+<div class="gallery-viewport">
+  <ul class="gallery-track" data-columns={columns} data-gallery-track>
+    {
+      images.map((image, index) => (
+        <li class="gallery-slot">
+          <GalleryItem image={image} loading={index === 0 ? 'eager' : 'lazy'} />
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<dialog class="lightbox" data-lightbox aria-label="Vista de imagen completa">
+  <button type="button" class="lightbox-close" data-lightbox-close aria-label="Cerrar vista">
+    &times;
+  </button>
+  <img class="lightbox-image" data-lightbox-image src="" alt="" />
+</dialog>
+
+<script>
+  // Duplica los items una sola vez para el loop infinito del carrusel
+  // (solo móvil). Sin JS se muestra la lista simple, sin duplicados.
+  const track = document.querySelector('[data-gallery-track]');
+  const dialog = document.querySelector('[data-lightbox]');
+  const dialogImage = document.querySelector('[data-lightbox-image]');
+  const carouselQuery = window.matchMedia('(max-width: 968px)');
+  const desktopQuery = window.matchMedia('(min-width: 969px)');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  // El lightbox es solo desktop: en móvil los botones quedan
+  // deshabilitados (fuera del orden de tabulación).
+  function syncButtons(): void {
+    document.querySelectorAll('[data-gallery-open]').forEach((button) => {
+      if (button instanceof HTMLButtonElement) {
+        button.disabled = !desktopQuery.matches;
+      }
+    });
+  }
+
+  function syncLoop(): void {
+    if (!track) return;
+    track.querySelectorAll('[data-clone]').forEach((clone) => clone.remove());
+    if (carouselQuery.matches && !reducedMotion.matches) {
+      track.querySelectorAll('.gallery-slot').forEach((slot) => {
+        const clone = slot.cloneNode(true) as HTMLElement;
+        clone.setAttribute('data-clone', 'true');
+        clone.setAttribute('aria-hidden', 'true');
+        clone.querySelectorAll('img').forEach((img) => {
+          img.setAttribute('alt', '');
+          img.setAttribute('loading', 'lazy');
+        });
+        clone.querySelectorAll('button').forEach((button) => {
+          button.setAttribute('tabindex', '-1');
+        });
+        track.appendChild(clone);
+      });
+    }
+    syncButtons();
+  }
+
+  function openLightbox(button: HTMLButtonElement): void {
+    if (!desktopQuery.matches) return;
+    if (!(dialog instanceof HTMLDialogElement)) return;
+    if (!(dialogImage instanceof HTMLImageElement)) return;
+    const img = button.querySelector('img');
+    if (!(img instanceof HTMLImageElement)) return;
+    dialogImage.src = img.currentSrc || img.src;
+    dialogImage.alt = img.alt;
+    if (!dialog.open) dialog.showModal();
+  }
+
+  track?.addEventListener('click', (event: Event) => {
+    if (!(event.target instanceof HTMLElement)) return;
+    const button = event.target.closest('[data-gallery-open]');
+    if (button instanceof HTMLButtonElement && !button.disabled) {
+      openLightbox(button);
+    }
+  });
+
+  if (dialog instanceof HTMLDialogElement) {
+    dialog
+      .querySelector('[data-lightbox-close]')
+      ?.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (event: Event) => {
+      if (event.target === dialog) dialog.close();
+    });
+  }
+
+  syncLoop();
+  carouselQuery.addEventListener('change', syncLoop);
+  desktopQuery.addEventListener('change', syncButtons);
+</script>

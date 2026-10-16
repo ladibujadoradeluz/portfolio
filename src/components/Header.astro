@@ -1,43 +1,47 @@
 ---
+import IconMoon from './icons/IconMoon.astro';
+import IconSun from './icons/IconSun.astro';
+import { site } from '../data/site';
 ---
+
 <header class="header">
-  <nav class="nav">
-    <a href="/" class="brand-link">
-      <span class="brand-name">María Camila Porras</span>
-      <span class="brand-subtitle">La Dibujadora de Luz</span>
+  <nav class="nav" aria-label="Navegación principal">
+    <a href="#inicio" class="brand-link">
+      <span class="brand-name">{site.name}</span>
+      <span class="brand-subtitle">{site.tagline}</span>
     </a>
-    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+    <button
+      type="button"
+      class="nav-toggle"
+      id="navToggle"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="navMenu"
+    >
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
     </button>
-    <div class="nav-spacer"></div>
     <ul class="nav-menu" id="navMenu">
       <li class="nav-item">
-        <a href="/#" class="nav-link">Inicio</a>
+        <a href="#inicio" class="nav-link">Inicio</a>
       </li>
       <li class="nav-item">
-        <a href="/#gallery" class="nav-link">Galería</a>
+        <a href="#gallery" class="nav-link">Galería</a>
       </li>
       <li class="nav-item">
-        <a href="/#about" class="nav-link">Sobre mí</a>
+        <a href="#about" class="nav-link">Sobre mí</a>
       </li>
       <li class="nav-item">
-        <button class="theme-toggle" id="themeToggle" aria-label="Activar modo oscuro" aria-pressed="false">
-          <svg class="theme-icon theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-          <svg class="theme-icon theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
+        <button
+          type="button"
+          class="theme-toggle"
+          id="themeToggle"
+          aria-label="Activar modo oscuro"
+          aria-pressed="false"
+        >
+          <IconMoon />
+          <IconSun />
         </button>
       </li>
     </ul>
@@ -45,90 +49,35 @@
 </header>
 
 <script>
+  import { initThemeToggle } from '../scripts/theme';
+
+  initThemeToggle();
+
   const navToggle = document.getElementById('navToggle');
   const navMenu = document.getElementById('navMenu');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const themeToggle = document.getElementById('themeToggle');
 
-  function applyTheme(theme: string) {
-    const isDark = theme === 'dark';
-    document.documentElement.dataset.theme = theme;
-    try {
-      localStorage.setItem('theme', theme);
-    } catch {}
-    if (themeToggle instanceof HTMLButtonElement) {
-      themeToggle.setAttribute('aria-label', isDark ? 'Activar modo claro' : 'Activar modo oscuro');
-      themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+  function setMenuOpen(open: boolean): void {
+    navMenu?.classList.toggle('nav-menu-open', open);
+    if (navToggle instanceof HTMLButtonElement) {
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      navToggle.setAttribute(
+        'aria-label',
+        open ? 'Cerrar menú' : 'Abrir menú',
+      );
     }
   }
 
-  function getPreferredTheme(): string {
-    try {
-      const stored = localStorage.getItem('theme');
-      if (stored === 'dark' || stored === 'light') return stored;
-    } catch {}
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-
-  if (themeToggle) {
-    applyTheme(document.documentElement.dataset.theme || getPreferredTheme());
-    themeToggle.addEventListener('click', () => {
-      const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-      applyTheme(next);
-    });
-  }
-
-  if (navToggle && navMenu) {
+  if (navToggle instanceof HTMLButtonElement && navMenu) {
     navToggle.addEventListener('click', () => {
-      const isOpen = navMenu.classList.toggle('nav-menu-open');
-      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      setMenuOpen(!navMenu.classList.contains('nav-menu-open'));
     });
 
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('nav-menu-open');
-        navToggle.setAttribute('aria-expanded', 'false');
-      });
+    navMenu.querySelectorAll('.nav-link').forEach((link) => {
+      link.addEventListener('click', () => setMenuOpen(false));
+    });
+
+    document.addEventListener('keydown', (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMenuOpen(false);
     });
   }
-
-  document.querySelectorAll('a[href^="/#"]').forEach(anchor => {
-    anchor.addEventListener('click', (e: Event) => {
-      const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
-      if (!href) return;
-      const targetId = href.slice(2);
-      if (!targetId) return;
-      const target = document.getElementById(targetId);
-      if (target) {
-        e.preventDefault();
-        const header = document.querySelector('.header');
-        const headerHeight = header instanceof HTMLElement ? header.offsetHeight : 0;
-        const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight;
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
-        history.pushState(null, '', href);
-      }
-    });
-  });
-
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', (e: Event) => {
-      const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
-      if (!href || href === '#') return;
-      const target = document.getElementById(href.slice(1));
-      if (target) {
-        e.preventDefault();
-        const header = document.querySelector('.header');
-        const headerHeight = header instanceof HTMLElement ? header.offsetHeight : 0;
-        const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight;
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
-        history.pushState(null, '', href);
-      }
-    });
-  });
 </script>

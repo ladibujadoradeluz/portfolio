@@ -1,25 +1,13 @@
 ---
+import SocialLinks from './SocialLinks.astro';
+import { site } from '../data/site';
+
 const year = new Date().getFullYear();
 ---
+
 <footer class="footer">
   <div class="footer-content">
-    <p class="footer-text">&copy; {year} María Camila Porras. Todos los derechos reservados.</p>
-    <div class="footer-spacer"></div>
-    <ul class="footer-social">
-      <li class="footer-social-item">
-        <a href="https://instagram.com/ladibujadoradeluz" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram">
-          <svg class="footer-social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6zm4.75-2.75a1 1 0 110 2 1 1 0 010-2z"/>
-          </svg>
-        </a>
-      </li>
-      <li class="footer-social-item">
-        <a href="mailto:ladibujadoradeluz@gmail.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Correo electrónico">
-          <svg class="footer-social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 6a2 2 0 012-2h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6zm2 0v.01L12 13 20 6.01V6H4zm16 2.236l-7.386 6.154a1 1 0 01-1.228 0L4 8.236V18h16V8.236z"/>
-          </svg>
-        </a>
-      </li>
-    </ul>
+    <p class="footer-text">&copy; {year} {site.name}. Todos los derechos reservados.</p>
+    <SocialLinks variant="footer" />
   </div>
 </footer>

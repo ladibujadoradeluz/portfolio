@@ -1,0 +1,24 @@
+---
+import SocialLinks from './SocialLinks.astro';
+---
+
+<section class="about-section" id="about">
+  <h2 class="section-title">Sobre mí</h2>
+  <div class="about-content">
+    <div class="about-text-col">
+      <p class="about-text">
+        Soy fotógrafa de vocación. Mi pasión nace del deseo de capturar los recuerdos y darles materialidad para que se vuelvan eternos. Por eso, disfruto de explorar la espontaneidad y la comodidad de quién se deja fotografiar partiendo desde la creatividad. También, me gusta jugar con la ficción y construir escenas pausadas que sean soñadas. Mi trabajo se halla entre la fotografía de retrato, la fotografía de producto y la fotografía de paisaje.
+      </p>
+      <SocialLinks variant="contact" showLabels />
+    </div>
+    <figure class="about-figure">
+      <img
+        class="about-photo"
+        src="/images/cami-photo.webp"
+        alt="Retrato de María Camila Porras"
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
+  </div>
+</section>
