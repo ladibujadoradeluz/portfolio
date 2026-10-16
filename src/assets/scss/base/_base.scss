@@ -23,3 +23,8 @@ a {
 a:hover {
   color: var(--brand);
 }
+
+::selection {
+  background-color: $color-secondary;
+  color: black;
+}
