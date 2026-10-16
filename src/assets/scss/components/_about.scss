@@ -1,0 +1,109 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.about-section {
+  padding: ($spacing-xl * 2) $spacing-xl;
+  background-color: rgba(var(--surface-rgb), 0.2);
+  transition: background-color $transition-theme-duration $transition-theme-timing;
+}
+
+.about-section .section-title {
+  margin-bottom: $spacing-xl;
+}
+
+.about-content {
+  max-width: $container-wide;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: $spacing-xl;
+  align-items: stretch;
+  text-align: left;
+}
+
+.about-text-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: $spacing-lg;
+}
+
+.about-text {
+  font-family: $font-body;
+  font-size: $font-size-lead;
+  line-height: 1.9;
+  color: var(--text);
+  transition: color $transition-theme-duration $transition-theme-timing;
+}
+
+.about-figure {
+  margin: 0;
+  min-height: 320px;
+  max-height: 560px;
+  width: 100%;
+  justify-self: end;
+  overflow: hidden;
+}
+
+.about-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 7 / 8;
+  object-fit: cover;
+  border-radius: $radius-lg;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  list-style: none;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  transition: transform $transition-fast-duration $transition-base-timing, color $transition-theme-duration $transition-theme-timing;
+  font-family: $font-body;
+  color: var(--text);
+}
+
+.contact-link:hover {
+  transform: translateY(-2px);
+  color: var(--brand);
+}
+
+.contact-icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  display: block;
+}
+
+@include respond-to($breakpoint-sm) {
+  .about-section {
+    padding: $spacing-xl $spacing-md;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+  }
+
+  .about-figure {
+    min-height: 0;
+    max-height: none;
+  }
+
+  .about-photo {
+    aspect-ratio: 3 / 4;
+    height: auto;
+  }
+
+  .contact-info {
+    align-items: center;
+  }
+}

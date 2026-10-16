@@ -1,4 +1,5 @@
 @use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
 
 body {
   font-family: $font-body;
@@ -17,14 +18,34 @@ h1, h2, h3, h4, h5, h6 {
 a {
   color: var(--text);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color $transition-fast-duration $transition-base-timing;
 }
 
 a:hover {
   color: var(--brand);
 }
 
+// Compensa el header fijo en la navegación por anclas
+// (sustituye al scroll manual con JS que había en el Header).
+section[id] {
+  scroll-margin-top: $header-offset;
+}
+
 ::selection {
   background-color: $color-secondary;
-  color: black;
+  color: $color-status;
+}
+
+@include reduced-motion {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

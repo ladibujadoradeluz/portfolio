@@ -1,13 +1,14 @@
 @use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
 
 .header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 10;
+  z-index: $z-header;
   background-color: var(--bg);
-  box-shadow: 0 2px 4px rgba(var(--text-rgb), 0.06);
+  box-shadow: $shadow-header;
   padding: $spacing-lg $spacing-xl;
   border-bottom: 1px solid rgba(var(--text-rgb), 0.2);
   transition: background-color $transition-theme-duration $transition-theme-timing, border-color $transition-theme-duration $transition-theme-timing;
@@ -26,17 +27,18 @@
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  margin-right: auto;
 }
 
 .brand-name {
   font-family: $font-title;
-  font-size: 1.8rem;
+  font-size: $font-size-brand;
   line-height: 1.2;
 }
 
 .brand-subtitle {
   font-family: $font-body;
-  font-size: 0.9rem;
+  font-size: $font-size-small;
   color: var(--muted-accent);
   margin-top: 0.25rem;
   transition: color $transition-theme-duration $transition-theme-timing;
@@ -61,21 +63,18 @@
   transition: background-color $transition-theme-duration $transition-theme-timing;
 }
 
-.nav-spacer {
-  flex: 1 1 auto;
-}
-
 .nav-menu {
   display: flex;
   list-style: none;
   gap: $spacing-lg;
   flex-shrink: 0;
   align-items: center;
+  margin-left: auto;
 }
 
 .nav-link {
   font-family: $font-body;
-  font-size: 1rem;
+  font-size: $font-size-body;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   padding: $spacing-xs 0;
@@ -87,12 +86,12 @@
   justify-content: center;
   background: transparent;
   border: 1px solid transparent;
-  border-radius: 999px;
+  border-radius: $radius-full;
   color: var(--text);
   cursor: pointer;
   padding: $spacing-xs;
   line-height: 0;
-  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  transition: color $transition-fast-duration $transition-base-timing, border-color $transition-fast-duration $transition-base-timing, transform $transition-fast-duration $transition-base-timing;
 }
 
 .theme-toggle:hover {
@@ -124,7 +123,7 @@
   display: block;
 }
 
-@media (max-width: 768px) {
+@include respond-to($breakpoint-md) {
   .header {
     padding: $spacing-md $spacing-md;
   }
@@ -133,12 +132,13 @@
     gap: $spacing-sm;
   }
 
-  .nav-toggle {
-    display: block;
+  .brand-link {
+    margin-right: 0;
   }
 
-  .nav-spacer {
-    display: none;
+  .nav-toggle {
+    display: block;
+    margin-left: auto;
   }
 
   .nav-menu {
@@ -149,6 +149,7 @@
     background-color: var(--bg);
     border: 1px solid rgba(var(--text-rgb), 0.2);
     margin-top: $spacing-sm;
+    margin-left: 0;
     transition: background-color $transition-theme-duration $transition-theme-timing, border-color $transition-theme-duration $transition-theme-timing;
   }
 
@@ -185,16 +186,16 @@
   }
 
   .brand-name {
-    font-size: 1.5rem;
+    font-size: $font-size-brand-md;
   }
 
   .brand-subtitle {
-    font-size: 0.8rem;
+    font-size: $font-size-xs;
   }
 }
 
-@media (max-width: 480px) {
+@include respond-to($breakpoint-xs) {
   .brand-name {
-    font-size: 1.3rem;
+    font-size: $font-size-brand-sm;
   }
 }

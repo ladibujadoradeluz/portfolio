@@ -1,4 +1,5 @@
 @use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
 
 .footer {
   padding: $spacing-lg $spacing-xl;
@@ -15,15 +16,12 @@
   width: 100%;
 }
 
-.footer-spacer {
-  flex: 1 1 auto;
-}
-
 .footer-text {
   font-family: $font-body;
-  font-size: 0.9rem;
+  font-size: $font-size-small;
   color: var(--text);
   flex-shrink: 0;
+  margin-right: auto;
   transition: color $transition-theme-duration $transition-theme-timing;
 }
 
@@ -33,6 +31,7 @@
   list-style: none;
   flex-shrink: 0;
   align-items: center;
+  margin-left: auto;
 }
 
 .footer-social-link {
@@ -40,7 +39,7 @@
   align-items: center;
   justify-content: center;
   color: var(--text);
-  transition: color $transition-theme-duration $transition-theme-timing, transform 0.2s ease;
+  transition: color $transition-theme-duration $transition-theme-timing, transform $transition-fast-duration $transition-base-timing;
   padding: $spacing-xs;
 }
 
@@ -56,26 +55,24 @@
   display: block;
 }
 
-@media (max-width: 640px) {
+@include respond-to($breakpoint-sm) {
   .footer {
     padding: $spacing-md $spacing-md;
   }
-  
+
   .footer-content {
     flex-direction: column;
     text-align: center;
     gap: $spacing-sm;
   }
-  
-  .footer-spacer {
-    display: none;
-  }
-  
+
   .footer-text {
     font-size: 0.85rem;
+    margin-right: 0;
   }
-  
+
   .footer-social {
     gap: $spacing-sm;
+    margin-left: 0;
   }
 }

@@ -1,0 +1,22 @@
+@use 'variables' as *;
+
+// Media query de ancho máximo (enfoque desktop-first del proyecto).
+@mixin respond-to($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+// Media query de ancho mínimo.
+@mixin respond-from($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+// Respeta la preferencia de movimiento reducido del sistema.
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}

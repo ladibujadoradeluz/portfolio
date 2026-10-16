@@ -3,8 +3,8 @@
 @use 'base/fonts';
 @use 'base/reset';
 @use 'base/base';
-@use 'components/gallery-grid';
-@use 'components/gallery-carrousel';
-@use 'components/header';
+@use 'components/about';
 @use 'components/footer';
-@use 'layout/home';
+@use 'components/gallery';
+@use 'components/header';
+@use 'components/hero';
